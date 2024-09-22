@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cool Calculator</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #282c34;
+            font-family: 'Arial', sans-serif;
+            color: white;
+        }
+
+        .calculator {
+            background: #3a3f47;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            width: 300px;
+        }
+
+        #display {
+            width: 100%;
+            height: 60px;
+            font-size: 32px;
+            margin-bottom: 10px;
+            text-align: right;
+            background: #222529;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            padding: 10px;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 20px;
+            font-size: 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+        }
+
+        .btn:hover {
+            background: #45a049;
+            transform: scale(1.05);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .btn.operator {
+            background: #007BFF;
+        }
+
+        .btn.operator:hover {
+            background: #0056b3;
+        }
+
+        .btn.clear {
+            background: #dc3545;
+        }
+
+        .btn.clear:hover {
+            background: #c82333;
+        }
+
+        .theme-toggle {
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background: #ffcc00;
+            color: #000;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+
+        .theme-toggle:hover {
+            background: #e6b800;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button class="btn clear" onclick="clearDisplay()">C</button>
+            <button class="btn operator" onclick="appendToDisplay('/')">/</button>
+            <button class="btn operator" onclick="appendToDisplay('*')">*</button>
+            <button class="btn operator" onclick="appendToDisplay('-')">-</button>
+            <button class="btn" onclick="appendToDisplay('7')">7</button>
+            <button class="btn" onclick="appendToDisplay('8')">8</button>
+            <button class="btn" onclick="appendToDisplay('9')">9</button>
+            <button class="btn operator" onclick="appendToDisplay('+')">+</button>
+            <button class="btn" onclick="appendToDisplay('4')">4</button>
+            <button class="btn" onclick="appendToDisplay('5')">5</button>
+            <button class="btn" onclick="appendToDisplay('6')">6</button>
+            <button class="btn operator" onclick="calculateResult()">=</button>
+            <button class="btn" onclick="appendToDisplay('1')">1</button>
+            <button class="btn" onclick="appendToDisplay('2')">2</button>
+            <button class="btn" onclick="appendToDisplay('3')">3</button>
+            <button class="btn" onclick="appendToDisplay('0')">0</button>
+        </div>
+    </div>
+    <script>
+        let display = document.getElementById("display");
+
+        function appendToDisplay(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+
+        function toggleTheme() {
+            document.body.classList.toggle("light-theme");
+            document.querySelector(".calculator").classList.toggle("light-theme");
+            document.querySelector("#display").classList.toggle("light-theme");
+        }
+    </script>
+</body>
+</html>
